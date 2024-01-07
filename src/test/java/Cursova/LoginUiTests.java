@@ -1,18 +1,16 @@
-package cursova;
+package Cursova;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginUiTests {
 
-
-    @Test
+    @Test (groups = "Login test")
     public void positiveLoginTest() {
-        // Позитивний тест для входу
-        open("/"); // Головна сторінка
+        // A positive test for entry
+        open("/"); // Home page
         $("#j_username").setValue("dudko_78");
         $("#j_password").setValue("15032005");
         $(By.xpath("//button[contains(text(),'Sign in')]")).click();
@@ -20,10 +18,9 @@ public class LoginUiTests {
                 .shouldHave(text("Mykola Dudko"));
         $(By.xpath(" //span[contains(text(),'log out')]")).click();
     }
-
-    @Test
+    @Test (groups = "Login test")
     public void negativeLoginTestInvalidUsername() {
-        // Негативний тест для входу - невірний логін
+        // Negative login test - invalid login
         open("/");
         $("#j_username").setValue("invalidUsername");
         $("#j_password").setValue("15032005");
@@ -31,9 +28,9 @@ public class LoginUiTests {
         $(By.xpath("//div[contains(text(),'Invalid username or password')]"))
                 .shouldHave(text("Invalid username or password"));
     }
-    @Test
+    @Test (groups = "Login test")
     public void negativeLoginTestInvalidPassword() {
-        // Негативний тест для входу - невірний пароль
+        // A negative login test is an incorrect password
         open("/");
         $("#j_username").setValue("dudko_78");
         $("#j_password").setValue("invalidPassword");
@@ -41,6 +38,5 @@ public class LoginUiTests {
         $(By.xpath("//div[contains(text(),'Invalid username or password')]"))
                 .shouldHave(text("Invalid username or password"));
     }
-
 }
 

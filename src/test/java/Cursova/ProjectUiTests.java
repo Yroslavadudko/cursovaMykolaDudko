@@ -1,4 +1,4 @@
-package cursova;
+package Cursova;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;

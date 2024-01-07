@@ -1,22 +1,22 @@
 <suite name="MyTestSuite">
-    <test name="TestHomePage">
+<!--    <test name="TestHomePage">-->
+<!--        <classes>-->
+<!--            <class name="Cursova"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="TestLoginUi">
         <classes>
-            <class name="cursova"/>
+            <class name="Cursova.LoginUiTests"/>
         </classes>
     </test>
-    <test name="TestProjectsPage">
+    <test name="TestCreateProjectUi">
         <classes>
-            <class name="MyPortfolio.TestProjectsPage"/>
+            <class name="Cursova.ProjectUiTests"/>
         </classes>
     </test>
-    <test name="TestAboutPage">
-        <classes>
-            <class name="MyPortfolio.TestAboutPage"/>
-        </classes>
-    </test>
-    <test name="TestContactPage">
-        <classes>
-            <class name="MyPortfolio.TestContactPage"/>
-        </classes>
-    </test>
+<!--    <test name="TestContactPage">-->
+<!--        <classes>-->
+<!--            <class name="MyPortfolio.TestContactPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
