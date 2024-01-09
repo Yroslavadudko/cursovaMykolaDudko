@@ -11,15 +11,14 @@ import Base.BaseTest;
 public class ProjectUiTests extends BaseTest {
     @Test
     public void createProjectTest() {
-        // Тест для створення проекту
+        // Project creation
         loginWithValidCredentials();
         $(By.xpath("//header/div[3]/div[1]/a[1]/i[2]")).click();
         $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[1]/a[1]")).click();
         $("#form-name").setValue("Project Dudko");
-//        $(By.xpath("//span[contains(text(),'Freestyle project')]")).click();
-//        $("#ok-button").click();
-//        $(By.xpath("//body/div[@id='page-body']/div[@id='main-panel']/form[1]/div[1]/div[2]/div[1]/div[2]/textarea[1]"))
-//                .setValue("first"); // description
+        $(By.xpath("//input[@id='form-identifier']")).setValue("r_d-1");
+        $("div:nth-child(2) section:nth-child(1) form:nth-child(2) label:nth-child(9) > input:nth-child(1)").click();
+        $("#form-task_limit").setValue("5");
         $(By.xpath("//button[contains(text(),'Save')]")).click();
     }
     private void loginWithValidCredentials() {
