@@ -1,9 +1,4 @@
 <suite name="MyTestSuite">
-<!--    <test name="TestHomePage">-->
-<!--        <classes>-->
-<!--            <class name="Cursova"/>-->
-<!--        </classes>-->
-<!--    </test>-->
     <test name="TestLoginUi">
         <classes>
             <class name="Cursova.LoginUiTests"/>
@@ -14,9 +9,9 @@
             <class name="Cursova.ProjectUiTests"/>
         </classes>
     </test>
-<!--    <test name="TestContactPage">-->
-<!--        <classes>-->
-<!--            <class name="MyPortfolio.TestContactPage"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TestTaskUi">
+        <classes>
+            <class name="Cursova.TaskUiTests"/>
+        </classes>
+    </test>
 </suite>

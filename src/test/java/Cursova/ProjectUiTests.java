@@ -16,11 +16,12 @@ public class ProjectUiTests extends BaseTest {
         $(By.xpath("//header/div[3]/div[1]/a[1]/i[2]")).click();
         $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[1]/a[1]")).click();
         $("#form-name").setValue("Project Dudko");
-        $(By.xpath("//input[@id='form-identifier']")).setValue("r_d-1");
+        $(By.xpath("//input[@id='form-identifier']")).setValue("MYPROJECT");
         $("div:nth-child(2) section:nth-child(1) form:nth-child(2) label:nth-child(9) > input:nth-child(1)").click();
         $("#form-task_limit").setValue("5");
         $(By.xpath("//button[contains(text(),'Save')]")).click();
     }
+
     private void loginWithValidCredentials() {
         open("/");
         $("#form-username").setValue("admin");
