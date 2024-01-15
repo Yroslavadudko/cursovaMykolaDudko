@@ -8,6 +8,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class BasePage {
+    public static final String BASE_URL = "http://127.0.0.1";
+    public static final String BROWSER_SIZE = "1920x1080";
+    public static final String HOME_PAGE = "/";
     public SelenideElement getUsernameField(){
         return $("#form-username");
     }

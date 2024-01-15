@@ -1,15 +1,17 @@
 package Cursova;
 
 import Base.BasePage;
+import Base.BaseTest;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
 public class TaskUiTests extends BasePage {
+
     @BeforeClass
     public static void setUp() {
-        Configuration.baseUrl = "http://127.0.0.1";
-        Configuration.browserSize = "1920x1080";
+        BaseTest.setUpClass();
     }
     @Test
     public void createTaskTest(){
@@ -31,5 +33,4 @@ public class TaskUiTests extends BasePage {
         getCloseTask().click();
         getConfirmButton().click();
     }
-
 }

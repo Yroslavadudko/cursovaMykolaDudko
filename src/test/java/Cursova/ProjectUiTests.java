@@ -1,25 +1,28 @@
 package Cursova;
 
+import Base.BaseTest;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import Base.BasePage;
+import Base.ProjectPage;
 
-public class ProjectUiTests extends BasePage {
+import static com.codeborne.selenide.Selenide.open;
+
+public class ProjectUiTests extends ProjectPage {
     @BeforeClass
     public static void setUp() {
-        Configuration.baseUrl = "http://127.0.0.1";
-        Configuration.browserSize = "1920x1080";
+        BaseTest.setUpClass();
     }
     @Test
     public void createProjectTest() {
         // Project creation
         loginAsAdmin();
+        createNewFullProject();
+        // Add project test
+        BaseTest.homePage();
         getNewProjectField().click();
-        getFormNameProjectField().setValue("Project Dudko");
-        getIdentifierProjectField().setValue("MYPROJECT");
-        getColumnTaskProjectField().click();
-        getFormTaskLimitField().setValue("5");
+        getFormNameProjectField().setValue("Add Project Test");
+        getIdentifierProjectField().setValue("TEST");
         getSaveField().click();
     }
 }
