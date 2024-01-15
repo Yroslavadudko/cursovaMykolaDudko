@@ -1,12 +1,9 @@
 package Cursova;
 
 import Base.BaseTest;
-import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import Base.ProjectPage;
-
-import static com.codeborne.selenide.Selenide.open;
 
 public class ProjectUiTests extends ProjectPage {
     @BeforeClass

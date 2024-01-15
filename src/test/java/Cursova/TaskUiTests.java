@@ -2,7 +2,6 @@ package Cursova;
 
 import Base.BasePage;
 import Base.BaseTest;
-import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

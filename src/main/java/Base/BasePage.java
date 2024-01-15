@@ -11,6 +11,17 @@ public class BasePage {
     public static final String BASE_URL = "http://127.0.0.1";
     public static final String BROWSER_SIZE = "1920x1080";
     public static final String HOME_PAGE = "/";
+    public static final String USER = "admin";
+    public static final String PASSWORD = "admin";
+    public static final String INVALID_USER_PASSWORD = "invalid";
+    public void loginAsAdmin() {
+        open(HOME_PAGE);
+        getUsernameField().setValue(USER);
+        getPasswordField().setValue(PASSWORD);
+        getRememberMyField().click();
+        getSignInButton().click();
+    }
+
     public SelenideElement getUsernameField(){
         return $("#form-username");
     }
@@ -84,13 +95,5 @@ public class BasePage {
     }
     public SelenideElement getConfirmButton(){
         return $(By.xpath("//button[@id='modal-confirm-button']"));
-    }
-
-    public void loginAsAdmin() {
-        open("/");
-        getUsernameField().setValue("admin");
-        getPasswordField().setValue("admin");
-        getRememberMyField().click();
-        getSignInButton().click();
     }
 }

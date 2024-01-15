@@ -5,7 +5,6 @@ import Base.BaseTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
 
 public class LoginUiTests extends  BasePage {
     @BeforeClass
@@ -25,8 +24,8 @@ public class LoginUiTests extends  BasePage {
     public void negativeLoginTestInvalidUsername() {
         // Negative login test - invalid login
         BaseTest.homePage();
-        getUsernameField().setValue("invalidUsername");
-        getPasswordField().setValue("admin");
+        getUsernameField().setValue(BasePage.INVALID_USER_PASSWORD);
+        getPasswordField().setValue(BasePage.PASSWORD);
         getRememberMyField().click();
         getSignInButton().click();
         gedBadUsernamePasswordField().shouldHave(text("Bad username or password"));
@@ -35,8 +34,8 @@ public class LoginUiTests extends  BasePage {
     public void negativeLoginTestInvalidPassword() {
         // A negative login test is an incorrect password
         BaseTest.homePage();
-        getUsernameField().setValue("admin");
-        getPasswordField().setValue("invalidPassword");
+        getUsernameField().setValue(BasePage.USER);
+        getPasswordField().setValue(BasePage.INVALID_USER_PASSWORD);
         getRememberMyField().click();
         getSignInButton().click();
         gedBadUsernamePasswordField().shouldHave(text("Bad username or password"));
