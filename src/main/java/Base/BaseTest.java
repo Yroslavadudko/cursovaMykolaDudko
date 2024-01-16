@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class BaseTest {
 
     public static void setUpClass() {
-        Configuration.baseUrl = BASE_URL;
+        Configuration.baseUrl = BASE_URI;
         Configuration.browserSize = BROWSER_SIZE;
     }
 

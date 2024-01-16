@@ -1,4 +1,4 @@
-package Cursova;
+package CursovaUi;
 
 import Base.BasePage;
 import Base.BaseTest;

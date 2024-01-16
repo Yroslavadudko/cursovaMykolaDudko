@@ -1,4 +1,4 @@
-package Cursova;
+package CursovaUi;
 
 import Base.BaseTest;
 import org.testng.annotations.BeforeClass;

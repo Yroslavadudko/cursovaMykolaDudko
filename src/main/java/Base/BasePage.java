@@ -1,19 +1,21 @@
 package Base;
 
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.ja.然し;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class BasePage {
-    public static final String BASE_URL = "http://127.0.0.1";
+    public static final String BASE_URI = "http://127.0.0.1";
     public static final String BROWSER_SIZE = "1920x1080";
     public static final String HOME_PAGE = "/";
     public static final String USER = "admin";
     public static final String PASSWORD = "admin";
     public static final String INVALID_USER_PASSWORD = "invalid";
+    public static final String LOGIN_ENDPOINT = "/login";
+    private Cookie authToken;
     public void loginAsAdmin() {
         open(HOME_PAGE);
         getUsernameField().setValue(USER);
