@@ -18,9 +18,9 @@ public class BasePage {
     public static final String HOME_PAGE = "/";
     public static final String USER = "admin";
     public static final String PASSWORD = "admin";
-    public static final String USER_API = "dudko_7890912";
-    public static final String PASSWORD_API = "1503200590912";
-    public static final int USER_ID = 1510912;
+    public static final String USER_API = "dudko_78909123";
+    public static final String PASSWORD_API = "15032005909132";
+    public static final int USER_ID = 15109123;
     public static final String INVALID_USER_PASSWORD = "invalid";
     public static final String LOGIN_ENDPOINT = "/login";
     public static final String API_ENDPOINT = "/jsonrpc.php";
