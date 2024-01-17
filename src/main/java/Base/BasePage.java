@@ -6,16 +6,26 @@ import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import lombok.*;
 
 public class BasePage {
+    @Getter
+    @Setter
     public static final String BASE_URI = "http://127.0.0.1";
+
+    public static final String API_TOKEN = "99fb461985ba82e54c365366e95f54260c7d5730ec89d8e3dcac05c01c98";
     public static final String BROWSER_SIZE = "1920x1080";
     public static final String HOME_PAGE = "/";
     public static final String USER = "admin";
     public static final String PASSWORD = "admin";
+    public static final String USER_API = "dudko_7890912";
+    public static final String PASSWORD_API = "1503200590912";
+    public static final int USER_ID = 1510912;
     public static final String INVALID_USER_PASSWORD = "invalid";
     public static final String LOGIN_ENDPOINT = "/login";
+    public static final String API_ENDPOINT = "/jsonrpc.php";
     private Cookie authToken;
+
     public void loginAsAdmin() {
         open(HOME_PAGE);
         getUsernameField().setValue(USER);
@@ -98,4 +108,5 @@ public class BasePage {
     public SelenideElement getConfirmButton(){
         return $(By.xpath("//button[@id='modal-confirm-button']"));
     }
+
 }
