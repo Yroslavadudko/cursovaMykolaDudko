@@ -10,17 +10,14 @@ import lombok.*;
 
 public class BasePage {
     @Getter
-    @Setter
-    public static final String BASE_URI = "http://127.0.0.1";
-
-    public static final String API_TOKEN = "99fb461985ba82e54c365366e95f54260c7d5730ec89d8e3dcac05c01c98";
+    public static final String BASE_URL = "http://127.0.0.1";
     public static final String BROWSER_SIZE = "1920x1080";
     public static final String HOME_PAGE = "/";
     public static final String USER = "admin";
     public static final String PASSWORD = "admin";
-    public static final String USER_API = "dudko_78909123";
-    public static final String PASSWORD_API = "15032005909132";
-    public static final int USER_ID = 15109123;
+    public static final String USER_API = "dudko_79791345";
+    public static final String PASSWORD_API = "1503209791345";
+    public static final int USER_ID = 151091345;
     public static final String INVALID_USER_PASSWORD = "invalid";
     public static final String LOGIN_ENDPOINT = "/login";
     public static final String API_ENDPOINT = "/jsonrpc.php";

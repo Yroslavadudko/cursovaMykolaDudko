@@ -1,5 +1,8 @@
 package CursovaApi;
 
+import CursovaApi.Models.CreateTaskRequest;
+import CursovaApi.Models.CreateUserRequest;
+import CursovaApi.Models.RemoveUserRequest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -12,24 +15,31 @@ import java.util.Base64;
 import static Base.BasePage.*;
 import static io.restassured.RestAssured.given;
 
-public class UserApiTests {
+public class UserApiTests<NewUserRequest> {
+
+    private String authHeaderUser;
     private int userResult;
-    private String authHeader;
+    private int taskResult;
 
     @BeforeMethod
     public void setUp() {
-        RestAssured.baseURI = BASE_URI;
-        authHeader = "Basic " + Base64.getEncoder().encodeToString((USER + ":" + PASSWORD).getBytes());
+        RestAssured.baseURI = BASE_URL;
+        authHeaderUser = "Basic " + Base64.getEncoder().encodeToString((USER + ":" + PASSWORD).getBytes());
     }
 
-    @Test
+    @Test(priority = 1)
     public void createUserAsAdminTest() {
-        String createUserRequest = buildCreateUserRequest();
 
+        CreateUserRequest createUser = CreateUserRequest.builder()
+                .jsonrpc("2.0")
+                .method("createUser")
+                .id(USER_ID)
+                .params(CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API).build())
+                .build();
         Response createUserResponse = given()
-                .header("Authorization", authHeader)
+                .header("Authorization", authHeaderUser)
                 .contentType(ContentType.JSON)
-                .body(createUserRequest)
+                .body(createUser)
                 .post(API_ENDPOINT);
 
         createUserResponse.prettyPrint();
@@ -42,15 +52,43 @@ public class UserApiTests {
         userResult = createUserResponse.jsonPath().get("result");
         System.out.println("User created with Result: " + userResult);
     }
+    @Test(priority = 2)
+    public void createTaskTest() {
+        CreateTaskRequest createTask = CreateTaskRequest.builder()
+                .jsonrpc("2.0")
+                .method("createTask")
+                .id(USER_ID)
+                .params(CreateTaskRequest.ParamsCreate.builder().project_id(15).title("ApiRest").color_id("green").build())
+                .build();
+        Response createTaskResponse = given()
+                .auth().preemptive().basic(USER_API, PASSWORD_API)
+                .contentType(ContentType.JSON)
+                .body(createTask)
+                .post(API_ENDPOINT);
 
-    @Test
+        createTaskResponse.prettyPrint();
+
+        int createTaskStatusCode = createTaskResponse.getStatusCode();
+        System.out.println("Create Task Status Code: " + createTaskStatusCode);
+
+        Assert.assertEquals(createTaskStatusCode, 200, "Failed to create a new task");
+
+        taskResult = createTaskResponse.jsonPath().get("result");
+        System.out.println("Task created with ID: " + taskResult);
+    }
+
+    @Test(priority = 3)
     public void removeUserAsAdminTest() {
-        String removeUserRequest = buildRemoveUserRequest();
+        RemoveUserRequest removeUser = RemoveUserRequest.builder()
+                .jsonrpc("2.0")
+                .method("removeUser")
+                .id(USER_ID)
+                .params(RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
+                .build();
 
         Response removeUserResponse = given()
-                .header("Authorization", authHeader)
                 .contentType(ContentType.JSON)
-                .body(removeUserRequest)
+                .body(removeUser)
                 .delete(API_ENDPOINT);
 
         removeUserResponse.prettyPrint();
@@ -59,31 +97,9 @@ public class UserApiTests {
         System.out.println("Remove User Status Code: " + removeUserStatusCode);
         Assert.assertEquals(removeUserStatusCode, 200, "Failed to remove the user");
 
-        boolean removeUserResult = removeUserResponse.jsonPath().get("result");
-        System.out.println("User removed with Result: " + removeUserResult);
+        boolean userResult = removeUserResponse.jsonPath().get("result");
+        System.out.println("User removed with Result: " + userResult);
     }
 
-    private String buildCreateUserRequest() {
-        return "{\n" +
-                "    \"jsonrpc\": \"2.0\",\n" +
-                "    \"method\": \"createUser\",\n" +
-                "    \"id\": " + USER_ID + ",\n" +
-                "    \"params\": {\n" +
-                "        \"username\": \"" + USER_API + "\",\n" +
-                "        \"password\": \"" + PASSWORD_API + "\"\n" +
-                "    }\n" +
-                "}";
-    }
-
-    private String buildRemoveUserRequest() {
-        return "{\n" +
-                "    \"jsonrpc\": \"2.0\",\n" +
-                "    \"method\": \"removeUser\",\n" +
-                "    \"id\": " + USER_ID + ",\n" +
-                "    \"params\": {\n" +
-                "        \"user_id\": " + userResult + "\n" +
-                "    }\n" +
-                "}";
-    }
 }
 
