@@ -1,7 +1,7 @@
 package CursovaApi.Models;
 
 import lombok.*;
-
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor

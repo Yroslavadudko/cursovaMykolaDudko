@@ -7,18 +7,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RemoveTaskRequest {
+public class CreateProjectRequest {
     private String jsonrpc;
     private String method;
     private long id;
-    private RemoveTaskRequest.ParamsRemote params;
+    private CreateProjectRequest.ParamsCreate params;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class ParamsRemote {
-        private int task_id;
+    public static class ParamsCreate {
+        private String name;
     }
 }
