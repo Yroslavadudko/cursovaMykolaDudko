@@ -67,8 +67,8 @@ public class UserApiTests {
                 .jsonrpc("2.0")
                 .method("createTask")
                 .id(TASK_ID)
-                .params(CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).description("Testing API")
-                        .title(taskName).color_id("green").date_started("2024-01-18").build())
+                .params(CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).title(taskName)
+                        .description("Testing API").color_id("green").date_started("2024-01-18").build())
                 .build();
         Response createTaskResponse = performAuthorizedRequest(createTask);
         System.out.println("Creating task: " + taskName);
