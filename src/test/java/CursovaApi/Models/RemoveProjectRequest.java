@@ -7,22 +7,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateUserRequest {
+public class RemoveProjectRequest {
     private String jsonrpc;
     private String method;
     private long id;
-    private ParamsCreate params;
+    private RemoveProjectRequest.ParamsRemote params;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class ParamsCreate {
-        private String username;
-        private String password;
-        private String name;
-        private String role;
-        private String email;
+    public static class ParamsRemote {
+        private int project_id;
     }
 }

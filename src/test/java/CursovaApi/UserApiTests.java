@@ -14,8 +14,6 @@ import static Base.BasePage.*;
 import static io.restassured.RestAssured.given;
 
 public class UserApiTests {
-
-    private String authHeaderUser;
     private int userResult;
     private int taskResult;
     private int projectResult;
@@ -23,76 +21,60 @@ public class UserApiTests {
     @BeforeMethod
     public void setUp() {
         RestAssured.baseURI = BASE_URL;
-        authHeaderUser = "Basic " + Base64.getEncoder().encodeToString((USER + ":" + PASSWORD).getBytes());
+        String authHeaderUser = "Basic " + Base64.getEncoder().encodeToString((USER + ":" + PASSWORD).getBytes());
     }
 
-    @Test(priority = 1)
-    public void createUserAsAdminTest() {
+    @Test(priority = 1, dataProvider = "userData", dataProviderClass = DynamicUserTests.class)
+    public void createUserAsAdminTest(String userName) {
 
         CreateUserRequest createUser = CreateUserRequest.builder()
                 .jsonrpc("2.0")
                 .method("createUser")
                 .id(USER_ID)
-                .params(CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API).build())
+                .params(CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API)
+                        .name(userName).role("app-admin").email("dudkomykola@icloud.com").build())
                 .build();
-        Response createUserResponse = given()
-                .header("Authorization", authHeaderUser)
-                .contentType(ContentType.JSON)
-                .body(createUser)
-                .post(API_ENDPOINT);
-
+        Response createUserResponse = performAuthorizedRequest(createUser);
+        System.out.println("Creating new User: " + userName );
         createUserResponse.prettyPrint();
 
-        int createUserStatusCode = createUserResponse.getStatusCode();
-        System.out.println("Create User Status Code: " + createUserStatusCode);
-
-        Assert.assertEquals(createUserStatusCode, 200, "Failed to create a new user");
+        checkStatusCode(createUserResponse, 200, "Create User Status Code: ");
 
         userResult = createUserResponse.jsonPath().get("result");
         System.out.println("User created with Result: " + userResult);
     }
-    @Test (priority = 2)
-    public void createProjectTest(){
+    @Test (priority = 2, dataProvider = "projectData", dataProviderClass = DynamicProjectTests.class)
+    public void createProjectTest(String projectName){
         CreateProjectRequest createProject = CreateProjectRequest.builder()
                 .jsonrpc("2.0")
                 .method("createProject")
                 .id(USER_ID)
-                .params(CreateProjectRequest.ParamsCreate.builder().name("Dev").build())
+                .params(CreateProjectRequest.ParamsCreate.builder().name(projectName)
+                        .description("Coursework").start_date("2024-01-01").end_date("2024-02-05").build())
                 .build();
-        Response createProjectResponse = given()
-                .auth().preemptive().basic(API_LOGIN, API_TOKEN)
-                .contentType(ContentType.JSON)
-                .body(createProject)
-                .post(API_ENDPOINT);
+        Response createProjectResponse = performAuthorizedRequest(createProject);
+        System.out.println("Creating project: " + projectName);
         createProjectResponse.prettyPrint();
-        int createProjectStatusCode = createProjectResponse.getStatusCode();
-        System.out.println("Create Project Status Code: " + createProjectStatusCode);
 
-        Assert.assertEquals(createProjectStatusCode, 200, "Failed to create a new project");
+        checkStatusCode(createProjectResponse, 200,"Create Project Status Code: ");
 
         projectResult = createProjectResponse.jsonPath().get("result");
         System.out.println("Project created with ID: " + projectResult);
     }
-    @Test(priority = 3)
-    public void createTaskTest() {
+    @Test(priority = 3, dataProvider = "taskData", dataProviderClass = DynamicTaskTests.class)
+    public void createTaskTest(String taskName) {
         CreateTaskRequest createTask = CreateTaskRequest.builder()
                 .jsonrpc("2.0")
                 .method("createTask")
                 .id(TASK_ID)
-                .params(CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).title("ApiTestFree").color_id("green").build())
+                .params(CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).description("Testing API")
+                        .title(taskName).color_id("green").date_started("2024-01-18").build())
                 .build();
-        Response createTaskResponse = given()
-                .auth().preemptive().basic(API_LOGIN, API_TOKEN)
-                .contentType(ContentType.JSON)
-                .body(createTask)
-                .post(API_ENDPOINT);
-
+        Response createTaskResponse = performAuthorizedRequest(createTask);
+        System.out.println("Creating task: " + taskName);
         createTaskResponse.prettyPrint();
 
-        int createTaskStatusCode = createTaskResponse.getStatusCode();
-        System.out.println("Create Task Status Code: " + createTaskStatusCode);
-
-        Assert.assertEquals(createTaskStatusCode, 200, "Failed to create a new task");
+        checkStatusCode(createTaskResponse,200, "Create Task Status Code: ");
 
         taskResult = createTaskResponse.jsonPath().get("result");
         System.out.println("Task created with ID: " + taskResult);
@@ -105,19 +87,31 @@ public class UserApiTests {
                 .id(TASK_ID)
                 .params(RemoveTaskRequest.ParamsRemote.builder().task_id(taskResult).build())
                 .build();
-        Response removeTaskResponse = given()
-                .auth().preemptive().basic(API_LOGIN, API_TOKEN)
-                .contentType(ContentType.JSON)
-                .body(removeTask)
-                .delete(API_ENDPOINT);
+        Response removeTaskResponse = performAuthorizedRequest(removeTask);
         removeTaskResponse.prettyPrint();
-        int removeTaskStatusCod = removeTaskResponse.getStatusCode();
-        System.out.println("Remove Task Status Code: " + removeTaskStatusCod);
-        Assert.assertEquals(removeTaskStatusCod, 200, "Failed to remove the Task");
+
+        checkStatusCode(removeTaskResponse, 200, "Remove Task Status Code: ");
+
         boolean taskResult = removeTaskResponse.jsonPath().get("result");
         System.out.println("Task removed with Result: " + taskResult);
     }
     @Test(priority = 5)
+    public void removeProjectTest(){
+        RemoveProjectRequest removeProject = RemoveProjectRequest.builder()
+                .jsonrpc("2.0")
+                .method("removeProject")
+                .id(PROJECT_ID)
+                .params(RemoveProjectRequest.ParamsRemote.builder().project_id(projectResult).build())
+                .build();
+        Response removeProjectResponse = performAuthorizedRequest(removeProject);
+        removeProjectResponse.prettyPrint();
+
+        checkStatusCode(removeProjectResponse, 200, "Remove Project Status Code: ");
+
+        boolean projectResult = removeProjectResponse.jsonPath().get("result");
+        System.out.println("Project removed with Result: " + projectResult);
+    }
+    @Test(priority = 6)
     public void removeUserAsAdminTest() {
         RemoveUserRequest removeUser = RemoveUserRequest.builder()
                 .jsonrpc("2.0")
@@ -126,21 +120,26 @@ public class UserApiTests {
                 .params(RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
                 .build();
 
-        Response removeUserResponse = given()
-                .auth().preemptive().basic(API_LOGIN, API_TOKEN)
-//                .header("Authorization", authHeaderUser)
-                .contentType(ContentType.JSON)
-                .body(removeUser)
-                .delete(API_ENDPOINT);
-
+        Response removeUserResponse = performAuthorizedRequest(removeUser);
         removeUserResponse.prettyPrint();
 
-        int removeUserStatusCode = removeUserResponse.getStatusCode();
-        System.out.println("Remove User Status Code: " + removeUserStatusCode);
-        Assert.assertEquals(removeUserStatusCode, 200, "Failed to remove the user");
+        checkStatusCode(removeUserResponse, 200, "Remove User Status Code: ");
 
         boolean userResult = removeUserResponse.jsonPath().get("result");
         System.out.println("User removed with Result: " + userResult);
+    }
+    private Response performAuthorizedRequest(Object requestObject) {
+        return given()
+                .auth().preemptive().basic(API_LOGIN, API_TOKEN)
+                .contentType(ContentType.JSON)
+                .body(requestObject)
+                .post(API_ENDPOINT);
+    }
+
+    private void checkStatusCode(Response response, int expectedStatusCode, String message) {
+        int actualStatusCode = response.getStatusCode();
+        System.out.println(message + ": " + actualStatusCode);
+        Assert.assertEquals(actualStatusCode, expectedStatusCode, "Failed: " + message);
     }
 }
 

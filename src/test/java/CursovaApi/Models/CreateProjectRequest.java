@@ -20,5 +20,8 @@ public class CreateProjectRequest {
     @Builder
     public static class ParamsCreate {
         private String name;
+        private String description;
+        private String start_date;
+        private String end_date;
     }
 }
