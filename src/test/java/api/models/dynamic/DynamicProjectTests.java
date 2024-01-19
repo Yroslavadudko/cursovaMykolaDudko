@@ -1,7 +1,6 @@
-package CursovaApi.Models;
+package api.models.dynamic;
 
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 public class DynamicProjectTests {
     @DataProvider(name = "projectData")

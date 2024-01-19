@@ -1,17 +1,17 @@
 <suite name="MyTestSuite">
     <test name="TestLoginUi">
         <classes>
-            <class name="CursovaUi.LoginUiTests"/>
+            <class name="ui.LoginUiTests"/>
         </classes>
     </test>
     <test name="TestCreateProjectUi">
         <classes>
-            <class name="CursovaUi.ProjectUiTests"/>
+            <class name="ui.ProjectUiTests"/>
         </classes>
     </test>
     <test name="TestTaskUi">
         <classes>
-            <class name="CursovaUi.TaskUiTests"/>
+            <class name="ui.TaskUiTests"/>
         </classes>
     </test>
 </suite>

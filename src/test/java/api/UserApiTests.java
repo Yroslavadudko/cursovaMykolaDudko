@@ -1,6 +1,9 @@
-package CursovaApi;
+package api;
 
-import CursovaApi.Models.*;
+import api.models.dynamic.*;
+import api.models.args.*;
+import api.enums.UserRoles;
+import api.methods.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -27,12 +30,12 @@ public class UserApiTests {
     @Test(priority = 1, dataProvider = "userData", dataProviderClass = DynamicUserTests.class)
     public void createUserAsAdminTest(String userName) {
 
-        CreateUserRequest createUser = CreateUserRequest.builder()
+        UserInfo.CreateUserRequest createUser = UserInfo.CreateUserRequest.builder()
                 .jsonrpc("2.0")
-                .method("createUser")
+                .method(Users.CREATE_USER)
                 .id(USER_ID)
-                .params(CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API)
-                        .name(userName).role("app-admin").email("dudkomykola@icloud.com").build())
+                .params(UserInfo.CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API)
+                        .name(userName).role(UserRoles.ADMIN.getRole()).email("dudkomykola@icloud.com").build())
                 .build();
         Response createUserResponse = performAuthorizedRequest(createUser);
         System.out.println("Creating new User: " + userName );
@@ -45,11 +48,11 @@ public class UserApiTests {
     }
     @Test (priority = 2, dataProvider = "projectData", dataProviderClass = DynamicProjectTests.class)
     public void createProjectTest(String projectName){
-        CreateProjectRequest createProject = CreateProjectRequest.builder()
+        ProjectInfo.CreateProjectRequest createProject = ProjectInfo.CreateProjectRequest.builder()
                 .jsonrpc("2.0")
-                .method("createProject")
+                .method(Projects.CREATE_PROJECT)
                 .id(USER_ID)
-                .params(CreateProjectRequest.ParamsCreate.builder().name(projectName)
+                .params(ProjectInfo.CreateProjectRequest.ParamsCreate.builder().name(projectName)
                         .description("Coursework").start_date("2024-01-01").end_date("2024-02-05").build())
                 .build();
         Response createProjectResponse = performAuthorizedRequest(createProject);
@@ -63,11 +66,11 @@ public class UserApiTests {
     }
     @Test(priority = 3, dataProvider = "taskData", dataProviderClass = DynamicTaskTests.class)
     public void createTaskTest(String taskName) {
-        CreateTaskRequest createTask = CreateTaskRequest.builder()
+        TaskInfo.CreateTaskRequest createTask = TaskInfo.CreateTaskRequest.builder()
                 .jsonrpc("2.0")
-                .method("createTask")
+                .method(Tasks.CREATE_TASK)
                 .id(TASK_ID)
-                .params(CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).title(taskName)
+                .params(TaskInfo.CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).title(taskName)
                         .description("Testing API").color_id("green").date_started("2024-01-18").build())
                 .build();
         Response createTaskResponse = performAuthorizedRequest(createTask);
@@ -81,11 +84,11 @@ public class UserApiTests {
     }
     @Test(priority = 4)
     public void removeTaskTest(){
-        RemoveTaskRequest removeTask = RemoveTaskRequest.builder()
+        TaskInfo.RemoveTaskRequest removeTask = TaskInfo.RemoveTaskRequest.builder()
                 .jsonrpc("2.0")
-                .method("removeTask")
+                .method(Tasks.REMOVE_TASK)
                 .id(TASK_ID)
-                .params(RemoveTaskRequest.ParamsRemote.builder().task_id(taskResult).build())
+                .params(TaskInfo.RemoveTaskRequest.ParamsRemote.builder().task_id(taskResult).build())
                 .build();
         Response removeTaskResponse = performAuthorizedRequest(removeTask);
         removeTaskResponse.prettyPrint();
@@ -97,11 +100,11 @@ public class UserApiTests {
     }
     @Test(priority = 5)
     public void removeProjectTest(){
-        RemoveProjectRequest removeProject = RemoveProjectRequest.builder()
+        ProjectInfo.RemoveProjectRequest removeProject = ProjectInfo.RemoveProjectRequest.builder()
                 .jsonrpc("2.0")
-                .method("removeProject")
+                .method(Projects.REMOVE_PROJECT)
                 .id(PROJECT_ID)
-                .params(RemoveProjectRequest.ParamsRemote.builder().project_id(projectResult).build())
+                .params(ProjectInfo.RemoveProjectRequest.ParamsRemote.builder().project_id(projectResult).build())
                 .build();
         Response removeProjectResponse = performAuthorizedRequest(removeProject);
         removeProjectResponse.prettyPrint();
@@ -113,11 +116,11 @@ public class UserApiTests {
     }
     @Test(priority = 6)
     public void removeUserAsAdminTest() {
-        RemoveUserRequest removeUser = RemoveUserRequest.builder()
+        UserInfo.RemoveUserRequest removeUser = UserInfo.RemoveUserRequest.builder()
                 .jsonrpc("2.0")
-                .method("removeUser")
+                .method(Users.DELETE_USER)
                 .id(USER_ID)
-                .params(RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
+                .params(UserInfo.RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
                 .build();
 
         Response removeUserResponse = performAuthorizedRequest(removeUser);

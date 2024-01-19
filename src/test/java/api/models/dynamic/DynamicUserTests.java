@@ -1,4 +1,4 @@
-package CursovaApi.Models;
+package api.models.dynamic;
 
 import org.testng.annotations.DataProvider;
 
