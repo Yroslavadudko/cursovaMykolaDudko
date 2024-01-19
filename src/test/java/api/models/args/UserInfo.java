@@ -10,7 +10,7 @@ public class UserInfo {
     @AllArgsConstructor
     @Builder
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class CreateUserRequest {
+    public static class CreateUserRequest {
         private String jsonrpc;
         private String method;
         private long id;
@@ -34,7 +34,7 @@ public class UserInfo {
     @AllArgsConstructor
     @Builder
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class RemoveUserRequest {
+    public static class RemoveUserRequest {
         private String jsonrpc;
         private String method;
         private long id;

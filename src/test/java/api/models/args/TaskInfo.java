@@ -11,7 +11,7 @@ public class TaskInfo {
     @AllArgsConstructor
     @Builder
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class CreateTaskRequest {
+    public static class CreateTaskRequest {
         private String jsonrpc;
         private String method;
         private long id;
@@ -34,7 +34,7 @@ public class TaskInfo {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public class RemoveTaskRequest {
+    public static class RemoveTaskRequest {
         private String jsonrpc;
         private String method;
         private long id;

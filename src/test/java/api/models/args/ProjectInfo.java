@@ -10,7 +10,7 @@ public class ProjectInfo {
     @AllArgsConstructor
     @Builder
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class CreateProjectRequest {
+    public static class CreateProjectRequest {
         private String jsonrpc;
         private String method;
         private long id;
@@ -34,7 +34,7 @@ public class ProjectInfo {
     @AllArgsConstructor
     @Builder
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class RemoveProjectRequest {
+    public static class RemoveProjectRequest {
         private String jsonrpc;
         private String method;
         private long id;

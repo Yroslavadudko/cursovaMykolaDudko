@@ -14,6 +14,14 @@ import org.testng.annotations.Test;
 import java.util.Base64;
 
 import static Base.BasePage.*;
+import static api.enums.UserRoles.ADMIN;
+import static api.enums.UserRoles.MANAGER;
+import static api.methods.Projects.CREATE_PROJECT;
+import static api.methods.Projects.REMOVE_PROJECT;
+import static api.methods.Tasks.CREATE_TASK;
+import static api.methods.Tasks.REMOVE_TASK;
+import static api.methods.Users.CREATE_USER;
+import static api.methods.Users.DELETE_USER;
 import static io.restassured.RestAssured.given;
 
 public class UserApiTests {
@@ -32,10 +40,10 @@ public class UserApiTests {
 
         UserInfo.CreateUserRequest createUser = UserInfo.CreateUserRequest.builder()
                 .jsonrpc("2.0")
-                .method(Users.CREATE_USER)
+                .method(CREATE_USER)
                 .id(USER_ID)
                 .params(UserInfo.CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API)
-                        .name(userName).role(UserRoles.ADMIN.getRole()).email("dudkomykola@icloud.com").build())
+                        .name(userName).role(MANAGER.getRole()).email("dudkomykola@icloud.com").build())
                 .build();
         Response createUserResponse = performAuthorizedRequest(createUser);
         System.out.println("Creating new User: " + userName );
@@ -50,7 +58,7 @@ public class UserApiTests {
     public void createProjectTest(String projectName){
         ProjectInfo.CreateProjectRequest createProject = ProjectInfo.CreateProjectRequest.builder()
                 .jsonrpc("2.0")
-                .method(Projects.CREATE_PROJECT)
+                .method(CREATE_PROJECT)
                 .id(USER_ID)
                 .params(ProjectInfo.CreateProjectRequest.ParamsCreate.builder().name(projectName)
                         .description("Coursework").start_date("2024-01-01").end_date("2024-02-05").build())
@@ -68,7 +76,7 @@ public class UserApiTests {
     public void createTaskTest(String taskName) {
         TaskInfo.CreateTaskRequest createTask = TaskInfo.CreateTaskRequest.builder()
                 .jsonrpc("2.0")
-                .method(Tasks.CREATE_TASK)
+                .method(CREATE_TASK)
                 .id(TASK_ID)
                 .params(TaskInfo.CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).title(taskName)
                         .description("Testing API").color_id("green").date_started("2024-01-18").build())
@@ -86,7 +94,7 @@ public class UserApiTests {
     public void removeTaskTest(){
         TaskInfo.RemoveTaskRequest removeTask = TaskInfo.RemoveTaskRequest.builder()
                 .jsonrpc("2.0")
-                .method(Tasks.REMOVE_TASK)
+                .method(REMOVE_TASK)
                 .id(TASK_ID)
                 .params(TaskInfo.RemoveTaskRequest.ParamsRemote.builder().task_id(taskResult).build())
                 .build();
@@ -102,7 +110,7 @@ public class UserApiTests {
     public void removeProjectTest(){
         ProjectInfo.RemoveProjectRequest removeProject = ProjectInfo.RemoveProjectRequest.builder()
                 .jsonrpc("2.0")
-                .method(Projects.REMOVE_PROJECT)
+                .method(REMOVE_PROJECT)
                 .id(PROJECT_ID)
                 .params(ProjectInfo.RemoveProjectRequest.ParamsRemote.builder().project_id(projectResult).build())
                 .build();
@@ -118,7 +126,7 @@ public class UserApiTests {
     public void removeUserAsAdminTest() {
         UserInfo.RemoveUserRequest removeUser = UserInfo.RemoveUserRequest.builder()
                 .jsonrpc("2.0")
-                .method(Users.DELETE_USER)
+                .method(DELETE_USER)
                 .id(USER_ID)
                 .params(UserInfo.RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
                 .build();
