@@ -1,7 +1,7 @@
-package ui;
+package ui.tests;
 
 import Base.BasePage;
-import Base.BaseTest;
+import ui.tests.BaseTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.*;

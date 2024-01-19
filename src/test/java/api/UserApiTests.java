@@ -1,15 +1,11 @@
 package api;
 
+import api.models.args.projects.ProjectInfo;
+import api.models.args.tasks.TaskInfo;
+import api.models.args.users.UserInfo;
 import api.models.dynamic.*;
-import api.models.args.*;
-import api.enums.UserRoles;
-import api.methods.*;
-import api.steps.BaseApiSteps;
-import api.steps.StatusCodeSteps;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Base64;
@@ -38,7 +34,6 @@ public class UserApiTests {
 
     @Test(priority = 1, dataProvider = "userData", dataProviderClass = DynamicUserTests.class)
     public void createUserAsAdminTest(String userName) {
-
         UserInfo.CreateUserRequest createUser = UserInfo.CreateUserRequest.builder()
                 .jsonrpc("2.0")
                 .method(CREATE_USER)
@@ -49,9 +44,7 @@ public class UserApiTests {
         Response createUserResponse = performAuthorizedRequest(createUser);
         System.out.println("Creating new User: " + userName );
         createUserResponse.prettyPrint();
-
         checkStatusCode(createUserResponse, 200, "Create User Status Code: ");
-
         userResult = createUserResponse.jsonPath().get("result");
         System.out.println("User created with Result: " + userResult);
     }
@@ -67,9 +60,7 @@ public class UserApiTests {
         Response createProjectResponse = performAuthorizedRequest(createProject);
         System.out.println("Creating project: " + projectName);
         createProjectResponse.prettyPrint();
-
         checkStatusCode(createProjectResponse, 200,"Create Project Status Code: ");
-
         projectResult = createProjectResponse.jsonPath().get("result");
         System.out.println("Project created with ID: " + projectResult);
     }
@@ -85,9 +76,7 @@ public class UserApiTests {
         Response createTaskResponse = performAuthorizedRequest(createTask);
         System.out.println("Creating task: " + taskName);
         createTaskResponse.prettyPrint();
-
         checkStatusCode(createTaskResponse,200, "Create Task Status Code: ");
-
         taskResult = createTaskResponse.jsonPath().get("result");
         System.out.println("Task created with ID: " + taskResult);
     }
@@ -101,9 +90,7 @@ public class UserApiTests {
                 .build();
         Response removeTaskResponse = performAuthorizedRequest(removeTask);
         removeTaskResponse.prettyPrint();
-
         checkStatusCode(removeTaskResponse, 200, "Remove Task Status Code: ");
-
         boolean taskResult = removeTaskResponse.jsonPath().get("result");
         System.out.println("Task removed with Result: " + taskResult);
     }
@@ -117,9 +104,7 @@ public class UserApiTests {
                 .build();
         Response removeProjectResponse = performAuthorizedRequest(removeProject);
         removeProjectResponse.prettyPrint();
-
         checkStatusCode(removeProjectResponse, 200, "Remove Project Status Code: ");
-
         boolean projectResult = removeProjectResponse.jsonPath().get("result");
         System.out.println("Project removed with Result: " + projectResult);
     }
@@ -131,12 +116,9 @@ public class UserApiTests {
                 .id(USER_ID)
                 .params(UserInfo.RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
                 .build();
-
         Response removeUserResponse = performAuthorizedRequest(removeUser);
         removeUserResponse.prettyPrint();
-
         checkStatusCode(removeUserResponse, 200, "Remove User Status Code: ");
-
         boolean userResult = removeUserResponse.jsonPath().get("result");
         System.out.println("User removed with Result: " + userResult);
     }
