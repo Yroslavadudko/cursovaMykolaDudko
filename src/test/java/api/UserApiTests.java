@@ -4,17 +4,16 @@ import api.models.dynamic.*;
 import api.models.args.*;
 import api.enums.UserRoles;
 import api.methods.*;
+import api.steps.BaseApiSteps;
+import api.steps.StatusCodeSteps;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.Base64;
-
 import static Base.BasePage.*;
-import static api.enums.UserRoles.ADMIN;
 import static api.enums.UserRoles.MANAGER;
 import static api.methods.Projects.CREATE_PROJECT;
 import static api.methods.Projects.REMOVE_PROJECT;
@@ -22,6 +21,8 @@ import static api.methods.Tasks.CREATE_TASK;
 import static api.methods.Tasks.REMOVE_TASK;
 import static api.methods.Users.CREATE_USER;
 import static api.methods.Users.DELETE_USER;
+import static api.steps.BaseApiSteps.performAuthorizedRequest;
+import static api.steps.StatusCodeSteps.checkStatusCode;
 import static io.restassured.RestAssured.given;
 
 public class UserApiTests {
@@ -138,19 +139,6 @@ public class UserApiTests {
 
         boolean userResult = removeUserResponse.jsonPath().get("result");
         System.out.println("User removed with Result: " + userResult);
-    }
-    private Response performAuthorizedRequest(Object requestObject) {
-        return given()
-                .auth().preemptive().basic(API_LOGIN, API_TOKEN)
-                .contentType(ContentType.JSON)
-                .body(requestObject)
-                .post(API_ENDPOINT);
-    }
-
-    private void checkStatusCode(Response response, int expectedStatusCode, String message) {
-        int actualStatusCode = response.getStatusCode();
-        System.out.println(message + ": " + actualStatusCode);
-        Assert.assertEquals(actualStatusCode, expectedStatusCode, "Failed: " + message);
     }
 }
 
