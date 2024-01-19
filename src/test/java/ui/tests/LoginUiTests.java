@@ -5,6 +5,7 @@ import ui.tests.BaseTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.*;
+import static ui.tests.BaseTest.setUpClass;
 
 public class LoginUiTests extends  BasePage {
     @BeforeClass

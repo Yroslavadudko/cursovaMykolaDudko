@@ -8,6 +8,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import lombok.*;
 
+import java.util.Base64;
+
 public class BasePage {
     @Getter
     public static final String BASE_URL = "http://127.0.0.1";
@@ -17,14 +19,15 @@ public class BasePage {
     public static final String PASSWORD = "admin";
     public static final String API_LOGIN = "jsonrpc";
     public static final String API_TOKEN = "cc8da32fd10d691478cab74228d753a82d0eeff5aad37a95a06bcb9e1f2e";
-    public static final String USER_API = "dudko_38791";
-    public static final String PASSWORD_API = "0023051";
-    public static final int USER_ID = 0023051;
+    public static final String USER_API = "dudko_3879tt15";
+    public static final String PASSWORD_API = "00230tt515";
+    public static final int USER_ID = 0023075515;
     public static final int PROJECT_ID = 123456789;
     public static final int TASK_ID = 987654321;
     public static final String INVALID_USER_PASSWORD = "invalid";
     public static final String LOGIN_ENDPOINT = "/login";
     public static final String API_ENDPOINT = "/jsonrpc.php";
+    public static String authHeaderUser;
     private Cookie authToken;
 
     public void loginAsAdmin() {

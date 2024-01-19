@@ -5,7 +5,6 @@ import ui.tests.BaseTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-
 public class TaskUiTests extends BasePage {
 
     @BeforeClass

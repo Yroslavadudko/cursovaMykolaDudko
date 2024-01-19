@@ -12,9 +12,8 @@ public class BaseTest {
         Configuration.browserSize = BROWSER_SIZE;
     }
 
-    public static String homePage() {
+    public static void homePage() {
         open(HOME_PAGE);
-        return null;
     }
 
 

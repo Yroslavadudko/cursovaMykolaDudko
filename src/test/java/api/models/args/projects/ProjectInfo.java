@@ -3,6 +3,9 @@ package api.models.args.projects;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+@Data
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectInfo {
     @Getter
     @Setter

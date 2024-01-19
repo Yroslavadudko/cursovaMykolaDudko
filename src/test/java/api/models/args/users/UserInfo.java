@@ -2,7 +2,9 @@ package api.models.args.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-
+@Data
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfo {
     @Getter
     @Setter
