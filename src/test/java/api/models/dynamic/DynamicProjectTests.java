@@ -4,7 +4,7 @@ import org.testng.annotations.DataProvider;
 
 public class DynamicProjectTests {
     @DataProvider(name = "projectData")
-    public Object[][] projectData() {
+    public static Object[][] projectData() {
         return new Object[][]{
                 {"ProjectDudko1"},
 //                {"ProjectDudko2"},

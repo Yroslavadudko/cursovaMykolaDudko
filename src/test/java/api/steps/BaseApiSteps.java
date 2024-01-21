@@ -4,10 +4,8 @@ import api.models.args.result.Result;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.http.ContentType;
-
 import static Base.BasePage.*;
 import static api.steps.StatusCodeSteps.checkStatusCode;
-import static io.restassured.RestAssured.given;
 
 public class BaseApiSteps {
     public static Result<?> performAuthorizedRequest(Object requestObject) {

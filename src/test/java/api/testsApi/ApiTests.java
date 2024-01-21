@@ -1,4 +1,4 @@
-package api;
+package api.testsApi;
 
 import api.models.args.result.Result;
 import api.models.args.projects.ProjectInfo;
