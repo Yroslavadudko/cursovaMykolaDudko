@@ -18,7 +18,7 @@ public class TasksUiTests extends BaseTest {
         addNewTaskField().click();
         nameTaskField().setValue(taskName);
         saveField().click();
-        // Edit the Task
+        // Edit
         dropdownTaskField().click();
         editTask().click();
         newCommentTask().setValue("Close this Task");

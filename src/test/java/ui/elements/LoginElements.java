@@ -2,14 +2,12 @@ package ui.elements;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import static Base.BasePage.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginElements {
     public static SelenideElement userField() {
         return $("#form-username");
     }
-
     public static SelenideElement passwordField() {
         return $("#form-password");
     }

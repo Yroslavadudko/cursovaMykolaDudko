@@ -26,8 +26,8 @@ public class ProjectsUiTests extends BaseTest {
     public void removeProjectsTest(){
         // Project remove
         loginAsAdmin();
-        myProjects();
-        dropdownProjectField();
+        myProjects().click();
+        dropdownProjectField().click();
         configureProject().click();
         removeProjectField().click();
         confirmButton().click();

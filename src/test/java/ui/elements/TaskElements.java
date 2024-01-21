@@ -25,13 +25,13 @@ public class TaskElements {
                 "/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/textarea[1]"));
     }
     public static SelenideElement dropdownColorTask (){
-        return $(By.xpath("//select[@id='form-color_id']"));
+        return $(By.xpath("//body/div[@id='modal-overlay']/div[@id='modal-box']/div[@id='modal-content']/form[1]/div[1]/div[2]/span[1]/span[1]/span[1]/span[2]"));
     }
     public static SelenideElement colorTaskPurple(){
-        return $(By.xpath("//option[contains(text(),'Purple')]"));
+        return $(By.xpath("//div[contains(text(),'Purple')]"));
     }
     public static SelenideElement dropdownAssigneeTask(){
-        return $(By.xpath("/select[@id='form-owner_id']"));
+        return $("#form-owner_id");
     }
     public static SelenideElement assigneeAdminTask(){
         return $(By.xpath("//option[contains(text(),'admin')]"));
@@ -46,7 +46,7 @@ public class TaskElements {
 
 
     public static SelenideElement closeTask(){
-        return $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[15]/a[1]"));
+        return $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[14]/a[1]/i[1]"));
     }
     public static SelenideElement confirmButton(){
         return $(By.xpath("//button[@id='modal-confirm-button']"));
