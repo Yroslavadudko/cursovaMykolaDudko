@@ -27,7 +27,7 @@ public class ApiTests {
         authHeaderUser = "Basic " + Base64.getEncoder().encodeToString((USER + ":" + PASSWORD).getBytes());
     }
 
-    @Test(priority = 1, dataProvider = "userData", dataProviderClass = DynamicUserTests.class)
+    @Test(groups = "ApiProjectsTests", priority = 1, dataProvider = "userData", dataProviderClass = DynamicUserTests.class)
     public void createUserAsAdminTest(String userName) {
         UserInfo.CreateUserRequest createUser = UserInfo.CreateUserRequest.builder()
                 .jsonrpc("2.0")
@@ -42,7 +42,7 @@ public class ApiTests {
         System.out.println("User created with Result: " + userResult);
     }
 
-    @Test(priority = 2, dataProvider = "projectData", dataProviderClass = DynamicProjectTests.class)
+    @Test(groups = "ApiProjectsTests", priority = 2, dataProvider = "projectData", dataProviderClass = DynamicProjectTests.class)
     public void createProjectTest(String projectName) {
         ProjectInfo.CreateProjectRequest createProject = ProjectInfo.CreateProjectRequest.builder()
                 .jsonrpc("2.0")
@@ -56,7 +56,7 @@ public class ApiTests {
         System.out.println("Creating new Project: " + projectName);
         System.out.println("Project created with Result: " + projectResult);
     }
-    @Test(priority = 3, dataProvider = "taskData", dataProviderClass = DynamicTaskTests.class)
+    @Test(groups = "ApiProjectsTests", priority = 3, dataProvider = "taskData", dataProviderClass = DynamicTaskTests.class)
     public void createTaskTest(String taskName) {
         int resultProject_id = 0;
         TaskInfo.CreateTaskRequest createTask = TaskInfo.CreateTaskRequest.builder()
@@ -71,7 +71,7 @@ public class ApiTests {
         System.out.println("Creating new Task: " + taskName);
         System.out.println("Task created with Result: " + taskResult);
     }
-    @Test(priority = 4)
+    @Test(groups = "ApiProjectsTests", priority = 4)
     public void removeTaskTest(){
         TaskInfo.RemoveTaskRequest removeTask = TaskInfo.RemoveTaskRequest.builder()
                 .jsonrpc("2.0")
@@ -85,7 +85,7 @@ public class ApiTests {
         System.out.println("Task removed with Result: " + resultWithId);
         System.out.println("Task removed result: " + taskRemovedResult);
     }
-    @Test(priority = 5)
+    @Test(groups = "ApiProjectsTests", priority = 5)
     public void removeProjectTest(){
         ProjectInfo.RemoveProjectRequest removeProject = ProjectInfo.RemoveProjectRequest.builder()
                 .jsonrpc("2.0")
@@ -99,7 +99,7 @@ public class ApiTests {
         System.out.println("Project removed with Result: " + resultWithId);
         System.out.println("Project removed result: " + projectRemovedResult);
     }
-    @Test(priority = 6)
+    @Test(groups = "ApiProjectsTests", priority = 6)
     public void removeUserAsAdminTest() {
         UserInfo.RemoveUserRequest removeUser = UserInfo.RemoveUserRequest.builder()
                 .jsonrpc("2.0")

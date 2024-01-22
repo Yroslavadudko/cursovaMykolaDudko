@@ -1,12 +1,20 @@
 package ui.testsUi;
 
 import api.models.dynamic.DynamicProjectTests;
+import io.restassured.RestAssured;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static Base.BasePage.BASE_URL;
 import static ui.elements.ProjectElements.*;
 import static ui.elements.TaskElements.confirmButton;
 import static ui.steps.LoginPage.loginAsAdmin;
 
-public class ProjectsUiTests extends BaseTest {
+public class ProjectsUiTests extends BaseTests {
+    @BeforeMethod
+    public void setUp(){
+        RestAssured.baseURI = BASE_URL;
+    }
 
 
     @Test(priority = 3, groups = "UiProjectsTests",

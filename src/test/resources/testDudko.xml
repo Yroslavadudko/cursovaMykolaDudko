@@ -1,0 +1,53 @@
+<suite name="MyTestSuite">
+    <test name="TestLoginUi">
+        <classes>
+            <class name="ui.testsUi.LoginsUiTests"/>
+        </classes>
+    </test>
+    <test name="TestCreateProjectUi">
+        <classes>
+            <class name="ui.testsUi.ProjectsUiTests"/>
+        </classes>
+    </test>
+    <test name="TestTaskUi">
+        <classes>
+            <class name="ui.testsUi.TasksUiTests"/>
+        </classes>
+    </test>
+    <test name="ApiProjectsTests">
+        <classes>
+            <class name="api.testsApi.ApiTests"/>
+        </classes>
+    </test>
+</suite>
+
+
+<!--<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">-->
+<!--<suite name="TestSuite">-->
+<!-- UI Projects Tests -->
+<!--<test name="UiProjectsTests">-->
+<!--    <groups>-->
+<!--        <run>-->
+<!--            <include name="UiProjectsTests" />-->
+<!--        </run>-->
+<!--    </groups>-->
+<!--    <classes>-->
+<!--        <class name="ui.testsUi.BaseTests" />-->
+
+<!--        <class name="ui.testsUi.TasksUiTests" />-->
+<!--    </classes>-->
+<!--</test>-->
+
+<!-- API Projects Tests -->
+<!--<test name="ApiProjectsTests">-->
+<!--    <groups>-->
+<!--        <run>-->
+<!--            <include name="ApiProjectsTests" />-->
+<!--        </run>-->
+<!--    </groups>-->
+<!--    <classes>-->
+<!--        <class name="api.testsApi.ApiTests" />-->
+<!--    </classes>-->
+<!--</test>-->
+<!--</suite>-->
+

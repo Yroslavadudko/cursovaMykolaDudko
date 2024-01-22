@@ -1,15 +1,18 @@
 package ui.testsUi;
 
+import com.codeborne.selenide.Configuration;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utils.LocalDriver;
 
 import static Base.BasePage.*;
 import static com.codeborne.selenide.Condition.*;
 import static ui.elements.LoginElements.*;
 import static ui.steps.LoginPage.*;
 
-public class LoginsUiTests extends BaseTest {
+public class LoginsUiTests extends BaseTests {
 
-    @Test (priority = 6, groups = "UiProjectsTests")
+    @Test (groups = "UiProjectsTests",priority = 6)
     public  void positiveLoginTest() {
         // A positive test for entry
         loginAsAdmin();
@@ -17,7 +20,7 @@ public class LoginsUiTests extends BaseTest {
         activationUsernameField().shouldHave(text("admin"));
         logOutButton().click();
     }
-    @Test (priority = 1, groups = "UiProjectsTests")
+    @Test (groups = "UiProjectsTests", priority = 1)
     public void negativeLoginTestInvalidUsername() {
         // Negative login test - invalid login
         homePage();
@@ -27,7 +30,7 @@ public class LoginsUiTests extends BaseTest {
         signInButton().click();
         badUsernamePasswordField().shouldHave(text("Bad username or password"));
     }
-    @Test (priority = 2, groups = "UiProjectsTests")
+    @Test (groups = "UiProjectsTests", priority = 2)
     public void negativeLoginTestInvalidPassword() {
         // A negative login test is an incorrect password
         homePage();
