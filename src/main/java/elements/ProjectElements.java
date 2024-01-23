@@ -1,4 +1,4 @@
-package ui.elements;
+package elements;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;

@@ -1,13 +1,15 @@
 package ui.steps;
 
-import static Base.BasePage.*;
+import config.Config;
 import static com.codeborne.selenide.Selenide.open;
-import static ui.elements.LoginElements.*;
+import static elements.LoginElements.*;
+
+
 public class LoginPage{
     public static void loginAsAdmin() {
-        open(HOME_PAGE);
-        userField().setValue(USER);
-        passwordField().setValue(PASSWORD);
+        open(Config.getHomePage());
+        userField().setValue(Config.getUser());
+        passwordField().setValue(Config.getPassword());
         rememberMyField();
         signInButton().click();
     }

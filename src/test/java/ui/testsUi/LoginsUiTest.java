@@ -1,10 +1,10 @@
 package ui.testsUi;
 
 import com.codeborne.selenide.Configuration;
+import config.Config;
 import org.testng.annotations.*;
-import static Base.BasePage.*;
 import static com.codeborne.selenide.Condition.*;
-import static ui.elements.LoginElements.*;
+import static elements.LoginElements.*;
 import static ui.steps.LoginPage.*;
 
 public class LoginsUiTest extends BaseTest {
@@ -32,8 +32,8 @@ public class LoginsUiTest extends BaseTest {
         Configuration.browser = browserName;
         Configuration.headless = headless;
         homePage();
-        userField().setValue(INVALID_USER_PASSWORD);
-        passwordField().setValue(PASSWORD);
+        userField().setValue(Config.getInvalidUserPassword());
+        passwordField().setValue(Config.getPassword());
         rememberMyField().click();
         signInButton().click();
         badUsernamePasswordField().shouldHave(text("Bad username or password"));
@@ -45,8 +45,8 @@ public class LoginsUiTest extends BaseTest {
         Configuration.browser = browserName;
         Configuration.headless = headless;
         homePage();
-        userField().setValue(USER);
-        passwordField().setValue(INVALID_USER_PASSWORD);
+        userField().setValue(Config.getUser());
+        passwordField().setValue(Config.getInvalidUserPassword());
         rememberMyField().click();
         signInButton().click();
         badUsernamePasswordField().shouldHave(text("Bad username or password"));

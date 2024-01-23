@@ -1,9 +1,9 @@
 package ui.steps;
 
-import static ui.elements.ProjectElements.*;
-import static ui.elements.ProjectElements.saveField;
-import static ui.elements.TaskElements.*;
-import static ui.elements.TaskElements.confirmButton;
+import static elements.ProjectElements.*;
+import static elements.ProjectElements.saveField;
+import static elements.TaskElements.*;
+import static elements.TaskElements.confirmButton;
 import static ui.steps.LoginPage.loginAsAdmin;
 
 public class TaskPage {

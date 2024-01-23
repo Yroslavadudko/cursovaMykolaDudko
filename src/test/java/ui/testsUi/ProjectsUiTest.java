@@ -2,7 +2,7 @@ package ui.testsUi;
 
 import api.models.dynamic.DynamicProjectTests;
 import org.testng.annotations.Test;
-import static ui.elements.ProjectElements.*;
+import static elements.ProjectElements.*;
 import static ui.steps.LoginPage.loginAsAdmin;
 import static ui.steps.ProjectPage.removeProject;
 import static ui.steps.TaskPage.createAndEditTasks;

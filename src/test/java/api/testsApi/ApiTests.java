@@ -5,11 +5,11 @@ import api.models.args.projects.ProjectInfo;
 import api.models.args.tasks.TaskInfo;
 import api.models.args.users.UserInfo;
 import api.models.dynamic.*;
+import config.Config;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Base64;
-import static Base.BasePage.*;
 import static api.enums.UserRoles.MANAGER;
 import static api.methods.Projects.CREATE_PROJECT;
 import static api.methods.Projects.REMOVE_PROJECT;
@@ -21,10 +21,12 @@ import static api.models.args.result.CreateResult.*;
 import static api.steps.BaseApiSteps.performAuthorizedRequest;
 
 public class ApiTests {
+    public static String authHeaderUser;
     @BeforeMethod
     public void setUp() {
-        RestAssured.baseURI = BASE_URL;
-        authHeaderUser = "Basic " + Base64.getEncoder().encodeToString((USER + ":" + PASSWORD).getBytes());
+        RestAssured.baseURI = Config.getBaseUrl();
+        authHeaderUser = "Basic " + Base64.getEncoder()
+                .encodeToString((Config.getUser() + ":" + Config.getPassword()).getBytes());
     }
 
     @Test(groups = "ApiProjectsTests", priority = 1, dataProvider = "userData", dataProviderClass = DynamicUserTests.class)
@@ -32,8 +34,9 @@ public class ApiTests {
         UserInfo.CreateUserRequest createUser = UserInfo.CreateUserRequest.builder()
                 .jsonrpc("2.0")
                 .method(CREATE_USER)
-                .id(USER_ID)
-                .params(UserInfo.CreateUserRequest.ParamsCreate.builder().username(USER_API).password(PASSWORD_API)
+                .id(Config.getUserId())
+                .params(UserInfo.CreateUserRequest.ParamsCreate.builder()
+                        .username(Config.getUserApi()).password(Config.getPasswordApi())
                         .name(userName).role(MANAGER.getRole()).email("dudkomykola@icloud.com").build())
                 .build();
         Result result = performAuthorizedRequest(createUser);
@@ -47,7 +50,7 @@ public class ApiTests {
         ProjectInfo.CreateProjectRequest createProject = ProjectInfo.CreateProjectRequest.builder()
                 .jsonrpc("2.0")
                 .method(CREATE_PROJECT)
-                .id(USER_ID)
+                .id(Config.getUserId())
                 .params(ProjectInfo.CreateProjectRequest.ParamsCreate.builder().name(projectName).description("Coursework")
                         .start_date("2024-01-01").end_date("2024-02-05").build())
                 .build();
@@ -62,7 +65,7 @@ public class ApiTests {
         TaskInfo.CreateTaskRequest createTask = TaskInfo.CreateTaskRequest.builder()
                 .jsonrpc("2.0")
                 .method(CREATE_TASK)
-                .id(TASK_ID)
+                .id(Config.getTaskId())
                 .params(TaskInfo.CreateTaskRequest.ParamsCreate.builder().project_id(projectResult).title(taskName)
                         .description("Testing API").color_id("green").date_started("2024-01-18").build())
                 .build();
@@ -76,7 +79,7 @@ public class ApiTests {
         TaskInfo.RemoveTaskRequest removeTask = TaskInfo.RemoveTaskRequest.builder()
                 .jsonrpc("2.0")
                 .method(REMOVE_TASK)
-                .id(TASK_ID)
+                .id(Config.getTaskId())
                 .params(TaskInfo.RemoveTaskRequest.ParamsRemote.builder().task_id(taskResult).build())
                 .build();
         Result result = performAuthorizedRequest(removeTask);
@@ -90,7 +93,7 @@ public class ApiTests {
         ProjectInfo.RemoveProjectRequest removeProject = ProjectInfo.RemoveProjectRequest.builder()
                 .jsonrpc("2.0")
                 .method(REMOVE_PROJECT)
-                .id(PROJECT_ID)
+                .id(Config.getProjectId())
                 .params(ProjectInfo.RemoveProjectRequest.ParamsRemote.builder().project_id(projectResult).build())
                 .build();
         Result result = performAuthorizedRequest(removeProject);
@@ -104,7 +107,7 @@ public class ApiTests {
         UserInfo.RemoveUserRequest removeUser = UserInfo.RemoveUserRequest.builder()
                 .jsonrpc("2.0")
                 .method(DELETE_USER)
-                .id(USER_ID)
+                .id(Config.getUserId())
                 .params(UserInfo.RemoveUserRequest.ParamsRemote.builder().user_id(userResult).build())
                 .build();
         Result result = performAuthorizedRequest(removeUser);
