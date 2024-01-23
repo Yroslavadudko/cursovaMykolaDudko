@@ -1,29 +1,18 @@
-package ui.testsUi;
+package ui.steps;
 
-import api.models.dynamic.DynamicTaskTests;
-import io.restassured.RestAssured;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import static Base.BasePage.BASE_URL;
 import static ui.elements.ProjectElements.*;
+import static ui.elements.ProjectElements.saveField;
 import static ui.elements.TaskElements.*;
+import static ui.elements.TaskElements.confirmButton;
 import static ui.steps.LoginPage.loginAsAdmin;
 
-public class TasksUiTests extends BaseTests {
-    @BeforeMethod
-    public void setUp(){
-        RestAssured.baseURI = BASE_URL;
-    }
-
-    @Test(groups = "UiProjectsTests", priority = 4, dataProvider = "taskData", dataProviderClass = DynamicTaskTests.class)
-    public void createTaskTest(String taskName){
-        // Task creation
+public class TaskPage {
+    public static void createAndEditTasks(){
         loginAsAdmin();
         myProjects().click();
         dropdownProjectField().click();
         addNewTaskField().click();
-        nameTaskField().setValue(taskName);
+        nameTaskField().setValue("MykolaDudko1");
         saveField().click();
         // Edit
         dropdownTaskField().click();
