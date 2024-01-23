@@ -20,7 +20,6 @@ public class LoginsUiTest extends BaseTest {
     public void positiveLoginTest(@Optional("firefox") String browserName, @Optional("false") boolean headless) {
         Configuration.browser = browserName;
         Configuration.headless = headless;
-
         loginAsAdmin();
         dropdownUserField().click();
         activationUsernameField().shouldHave(text("admin"));
@@ -32,7 +31,6 @@ public class LoginsUiTest extends BaseTest {
     public void negativeLoginTestInvalidUsername(@Optional("chrome") String browserName, @Optional("true") boolean headless) {
         Configuration.browser = browserName;
         Configuration.headless = headless;
-
         homePage();
         userField().setValue(INVALID_USER_PASSWORD);
         passwordField().setValue(PASSWORD);
@@ -46,7 +44,6 @@ public class LoginsUiTest extends BaseTest {
     public void negativeLoginTestInvalidPassword(@Optional("chrome") String browserName, @Optional("false") boolean headless) {
         Configuration.browser = browserName;
         Configuration.headless = headless;
-
         homePage();
         userField().setValue(USER);
         passwordField().setValue(INVALID_USER_PASSWORD);

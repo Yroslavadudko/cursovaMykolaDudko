@@ -1,7 +1,6 @@
 package ui.elements;
 
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.impl.SelenideElementDescriber;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -42,9 +41,6 @@ public class TaskElements {
     public static SelenideElement priorityLowTask(){
         return $(By.xpath("//option[contains(text(),'1')]"));
     }
-
-
-
     public static SelenideElement closeTask(){
         return $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[14]/a[1]/i[1]"));
     }
