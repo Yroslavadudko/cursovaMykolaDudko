@@ -3,10 +3,14 @@ name: Java CI with Maven and Allure Report
 on:
   pull_request:
     branches:
+      - master
       - main
+      - issue-*
   push:
     branches:
+      - master
       - main
+      - issue-*
   release:
     types:
       - created
@@ -29,12 +33,7 @@ jobs:
           cache: maven
 
       - name: Install Chrome
-        uses: selenide/actions/setup-selenide@v1
-        with:
-           browser: chrome
-           browser-version: latest
-           args: --headless
-
+        uses: browser-actions/setup-chrome@latest
 
       - name: Build the Project
         run: mvn clean install -DskipTests
