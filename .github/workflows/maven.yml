@@ -6,9 +6,7 @@ on:
       - main
   push:
     branches:
-      - master
       - main
-      - issue-*
   release:
     types:
       - created
@@ -31,9 +29,12 @@ jobs:
           cache: maven
 
       - name: Install Chrome
-        uses: browser-actions/setup-chrome@latest
+        uses: selenide/actions/setup-selenide@v1
         with:
-          headless: true
+           browser: chrome
+           browser-version: latest
+           args: --headless
+
 
       - name: Build the Project
         run: mvn clean install -DskipTests
