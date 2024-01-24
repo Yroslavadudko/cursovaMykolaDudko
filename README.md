@@ -1,71 +1,73 @@
 # Individual Project Mykola Dudko
 
-# Проект для тестування Kanboard
-Проект створений для автоматизованого тестування програмного забезпечення для управління проектами – Kanboard.
-Використовуються технології та бібліотеки, такі як testNG, Selenide, Rest Assured, Allure.
+# Project for Testing Kanboard
+The project is created for automated testing of project management software – Kanboard.
+Technologies and libraries such as testNG, Selenide, Rest Assured, and Allure are used.
 
-## Інструменти та Бібліотеки
-Ваш проект використовує такі інструменти та бібліотеки:
+## Tools and Libraries
+Your project utilizes the following tools and libraries:
 - [Kanboard](https://docs.kanboard.org/v1/api/)
 
-## Інструкції з встановлення та запуску
-1. Клонуйте репозиторій:
+## Installation and Running Instructions
+1. Clone the repository:
 
     ```bash
     git clone git@github.com:Yroslavadudko/individualProjectMykolaDudko.git
     ```
 
-2. Переконайтеся, що Docker встановлений на вашому пристрої.
-3. Завантажте та збережіть docker-compose.yml файл з [силання](https://github.com/robot-dreams-code/QA-Automation-3.0/tree/main/src/main/java/course-work).
-4. Виконайте команду для підняття Kanboard за допомогою Docker::
+2. Ensure that Docker is installed on your machine.
+3. Download and save the docker-compose.yml file from [here](https://github.com/robot-dreams-code/QA-Automation-3.0/tree/main/src/main/java/course-work).
+4. Execute the following command to start Kanboard using Docker:
 
     ```bash
     docker-compose up
     ```
 
-   Після запуску, знайдіть пароль адміністратора у терміналі, де ви виконали команду `docker-compose up`.
+   After the launch, find the administrator password in the terminal where you executed the `docker-compose up` command.
 
-## Запуск проекту локально
-1. Відкрийте Kanboard у вашому веб-браузері.
-2. Використовуйте наступні облікові дані для входу:
-* Логін: admin
-* Пароль: admin
-3. Для API тестів використовуйте ключ API, який можна знайти в налаштуваннях Kanboard (Settings -> API).
-4. Запустьть автотест:
+## Running the Project Locally
+1. Open Kanboard in your web browser.
+2. Use the following credentials to log in:
+    - Login: admin
+    - Password: admin
+3. For API tests, use the API key found in Kanboard settings (Settings -> API).
+4. Run the automated test:
 
     ```bash
     mvn clean test
     ```
-    Для того, щоб обрати, які тести ви хочете виконати, редагуйте конфігураційний файл.
-## Запуск Allure звіту
+   To choose which tests you want to execute, edit the configuration file.
 
-Для генерації та перегляду звітів Allure, використовуйте наступні команди:
+## Running the Allure Report
 
-1. **Генерація звіту:**
+To generate and view Allure reports, use the following commands:
+
+1. **Generate the report:**
 
     ```bash
     mvn allure:report
     ```
 
-   Згенерує HTML звіт у директорії `target/site/allure-maven/index.html`.
+   Generates an HTML report in the `target/site/allure-maven/index.html` directory.
 
-2. **Відкриття звіту у браузері:**
+2. **Open the report in the browser:**
 
     ```bash
     mvn allure:serve
     ```
 
-   Запустить локальний сервер та відкриє звіт у браузері.
+   Launches a local server and opens the report in the browser.
 
-## Інформація для тестування
+## Testing Information
 
-- **Kanboard:** [http://localhost/login](http://localhost/login) або [http://127.0.0.1/login](http://127.0.0.1/login)
-    - **Логін:** admin
-    - **Пароль:** admin
-    - **API ключ для API тестів:** Знаходиться в налаштуваннях -> API
+- **Kanboard:** [http://localhost/login](http://localhost/login) or [http://127.0.0.1/login](http://127.0.0.1/login)
+    - **Login:** admin
+    - **Password:** admin
+    - **API key for API tests:** Located in settings -> API
 
-- **Jenkins:** [http://localhost:8080](http://localhost:8080) (повинно перенаправити на [http://localhost:8080/login?from=%2F](http://localhost:8080/login?from=%2F))
-    - **Пароль адміністратора:** Знаходиться в терміналі, де ви виконали команду `docker-compose up`.
+- **Jenkins:** [http://localhost:8080](http://localhost:8080) (should redirect to [http://localhost:8080/login?from=%2F](http://localhost:8080/login?from=%2F))
+    - **Administrator password:** Found in the terminal where you executed the `docker-compose up` command.
+
 
 
 
