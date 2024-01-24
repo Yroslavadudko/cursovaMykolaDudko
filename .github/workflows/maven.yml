@@ -3,9 +3,7 @@ name: Java CI with Maven and Allure Report
 on:
   pull_request:
     branches:
-      - master
       - main
-      - issue-*
   push:
     branches:
       - master
@@ -35,7 +33,7 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@latest
         with:
-          headless: false
+          headless: true
 
       - name: Build the Project
         run: mvn clean install -DskipTests
