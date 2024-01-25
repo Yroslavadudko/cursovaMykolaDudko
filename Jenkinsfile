@@ -1,26 +1,50 @@
 pipeline {
     agent any
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
     triggers {
-            cron('0 9 * * *')
-        }
+        cron('0 9 * * *')
+    }
+    parameters {
+        choice(choices: ['regress', 'smoke'], description: 'Выбор сьюта для запуска', name: 'suiteToRun')
+    }
+    environment {
+        mailRecipients = 'dudkomykola@icloud.com'
+    }
+    tools {
+        jdk 'JDK 8u172'
+        maven 'Maven 4.0.0'
+    }
     stages {
-        stage('Build') {
+        stage('run tests') {
             steps {
-                // Команди для збирання вашого проекту
-                sh 'mvn clean install -DskipTests'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    withMaven() {
+                        sh "mvn clean install -Dgroups=${suiteToRun}"
+                    }
+                }
             }
         }
-        stage('Test') {
+        stage('run allure reports') {
             steps {
-                // Команди для запуску тестів
-                sh 'mvn clean test'
+                allure([includeProperties: true,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '**/allure-results']]
+                ])
             }
         }
-        stage('Deploy') {
-            steps {
-                // Команди для розгортання вашого проекту
-                // Наприклад, можливо ви залишите цей етап порожнім, якщо розгортання автоматично відбувається після успішного тестування
-            }
+    }
+    post {
+        always {
+            echo 'Pipeline is complete'
+            emailext (
+                subject: "CMXQA.TESTS Отчет прогона тестов [${env.BUILD_NUMBER}] ",
+                body: """Подробный allure-отчет: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+                to: "${env.mailRecipients}"
+            )
         }
     }
 }
