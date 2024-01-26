@@ -15,7 +15,7 @@ pipeline {
     }
     tools {
         jdk 'JDK 8u172'
-        maven 'Maven 4.0.0'
+        maven 'Maven 3.9.6'
     }
     stages {
         stage('Run Tests') {
