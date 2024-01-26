@@ -18,7 +18,7 @@ pipeline {
         maven 'Maven 4.0.0'
     }
     stages {
-        stage('run tests') {
+        stage('Run Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withMaven() {
@@ -27,13 +27,13 @@ pipeline {
                 }
             }
         }
-        stage('run allure reports') {
+        stage('Publish Allure Report') {
             steps {
-                allure([includeProperties: true,
+                allure([includeProperties: false,
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: '**/allure-results']]
+                        results: [[path: 'target/allure-results']]
                 ])
             }
         }
