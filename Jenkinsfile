@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     options {
@@ -22,7 +21,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withMaven() {
-                        sh "mvn clean install -Dgroups=${suiteToRun}"
+                        sh "mvn clean install -Dgroups=${MyTestSuite}"
                     }
                 }
             }
@@ -30,7 +29,6 @@ pipeline {
         stage('Publish Allure Report') {
             steps {
                 allure([includeProperties: false,
-                        jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
@@ -49,4 +47,5 @@ pipeline {
         }
     }
 }
+
 
