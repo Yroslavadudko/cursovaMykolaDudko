@@ -8,7 +8,7 @@ pipeline {
         cron('0 9 * * *')
     }
     parameters {
-        choice(choices: ['regress', 'smoke'], description: 'Выбор сьюта для запуска', name: 'suiteToRun')
+        choice(choices: ['regress', 'smoke'], description: 'MyTestSuite', name: 'MyTestSuite')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
