@@ -8,6 +8,8 @@ pipeline {
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
+        JAVA_HOME = '/usr/bin/java'
+        M2_HOME = '/usr/local/Cellar/maven/3.9.6/libexec'
     }
     tools {
         jdk 'JDK 17'
