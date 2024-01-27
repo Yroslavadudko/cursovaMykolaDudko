@@ -13,7 +13,7 @@ pipeline {
         mailRecipients = 'dudkomykola@icloud.com'
     }
     tools {
-         jdk 'JDK 8u221'
+         jdk 'JDK 9.0.4'
          maven 'Maven 3.9.6'
     }
     stages {
