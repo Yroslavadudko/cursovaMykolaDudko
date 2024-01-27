@@ -3,11 +3,8 @@ pipeline {
     options {
         timeout(time: 1, unit: 'HOURS')
     }
-    triggers {
-        cron('0 9 * * *')
-    }
     parameters {
-        choice(choices: ['regress', 'smoke'], description: 'MyTestSuite', name: 'MyTestSuite')
+        choice(choices: ['ApiProjectsTests', 'TestLoginUi', 'TestCreateProjectUi'], description: 'Select Test Suite', name: 'MyTestSuite')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
@@ -21,7 +18,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withMaven() {
-                        sh "mvn clean install -Dgroups=${MyTestSuite}"
+                        sh "mvn clean test -Dtest=${params.MyTestSuite}"
                     }
                 }
             }
@@ -40,8 +37,8 @@ pipeline {
         always {
             echo 'Pipeline is complete'
             emailext (
-                subject: "CMXQA.TESTS Test run report [${env.BUILD_NUMBER}] ",
-                body: """Detailed allure-report: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+                subject: "CMXQA.TESTS Test Run Report [${env.BUILD_NUMBER}] ",
+                body: """Detailed allure report: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
                 to: "${env.mailRecipients}"
             )
         }
