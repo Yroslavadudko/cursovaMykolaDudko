@@ -13,8 +13,8 @@ pipeline {
         mailRecipients = 'dudkomykola@icloud.com'
     }
     tools {
-         jdk 'JDK'
-         maven 'Maven'
+        jdk 'JDK' // Вибираємо встановлену JDK
+        maven 'Maven' // Вибираємо встановлений Maven
     }
     stages {
         stage('Run Tests') {
@@ -36,6 +36,14 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'Pipeline is complete'
+            emailext (
+                subject: "CMXQA.TESTS Test run report [${env.BUILD_NUMBER}] ",
+                body: """Detailed allure-report: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+                to: "${env.mailRecipients}"
+            )
+        }
+    }
 }
-
-
