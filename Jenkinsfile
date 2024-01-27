@@ -6,7 +6,6 @@ pipeline {
     parameters {
         string(name: 'MyTestSuite', description: 'Enter the name of the Test Suite', defaultValue: 'ApiProjectsTests')
     }
-My
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
         JAVA_HOME = '/usr/bin/java'
