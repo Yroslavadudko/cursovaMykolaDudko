@@ -4,8 +4,9 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     parameters {
-        choice(choices: ['ApiProjectsTests', 'TestLoginUi', 'TestCreateProjectUi'], description: 'Select Test Suite', name: 'MyTestSuite')
+        string(name: 'MyTestSuite', description: 'Enter the name of the Test Suite', defaultValue: 'ApiProjectsTests')
     }
+My
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
         JAVA_HOME = '/usr/bin/java'
