@@ -20,7 +20,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withMaven() {
-                        sh "mvn clean test -Dtest=${params.MyTestSuite}"
+                        sh "mvn clean test"
                     }
                 }
             }
