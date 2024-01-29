@@ -16,13 +16,6 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stage('Install Chrome') {
-            steps {
-                script {
-                    tool name: 'Chrome', type: 'hudson.plugins.chrome.tools.ChromeInstallation'
-                }
-            }
-        }
         stage('Build the Project') {
             steps {
                 sh "mvn clean install -DskipTests"
