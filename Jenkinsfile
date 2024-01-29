@@ -4,7 +4,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     parameters {
-        string(name: 'My Regression suite', description: 'Enter the name of the Test Suite', defaultValue: 'ApiProjectsTests')
+        string(name: 'My Regression suite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
