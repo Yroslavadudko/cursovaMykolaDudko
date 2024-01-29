@@ -5,6 +5,7 @@ pipeline {
     }
     parameters {
         string(name: 'My Regression suite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
+        string(name: 'baseUrl', defaultValue: 'http://127.0.0.1/login', description: 'Validate Application URL')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
