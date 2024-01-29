@@ -19,16 +19,24 @@ pipeline {
     stages {
         stage('Build the Project') {
             steps {
+                // Крок для збірки проекту
                 sh "mvn clean install -DskipTests"
             }
         }
-        stage('Run regression suite') {
+        stage('Run Tests') {
             steps {
-                sh "mvn clean test"
+                // Крок для запуску контейнера Docker зі сторінкою Kanboard
+                script {
+                    docker.image('kanboard/kanboard:latest').withRun('-p 80:80') { c ->
+                        // Команди для запуску тестів на вашій сторінці Kanboard
+                        sh "mvn clean test -DbaseUrl=${baseUrl}"
+                    }
+                }
             }
         }
         stage('Publish Allure Report') {
             steps {
+                // Крок для публікації звіту Allure
                 allure([includeProperties: false,
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
@@ -40,6 +48,7 @@ pipeline {
     post {
         always {
             echo 'Pipeline is complete'
+            // Крок для відправки електронного листа зі звітом
             emailext (
                 subject: "CMXQA.TESTS Test Run Report [${env.BUILD_NUMBER}] ",
                 body: """Detailed allure report: "<a href='${env.BUILD_URL}allure/'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
