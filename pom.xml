@@ -112,7 +112,6 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.6.3</version>
         </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -124,7 +123,6 @@
             <version>7.9.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

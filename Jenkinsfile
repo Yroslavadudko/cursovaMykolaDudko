@@ -16,13 +16,20 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stage('Run Tests') {
+        stage('Install Chrome') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withMaven() {
-                        sh "mvn clean test"
-                    }
-                }
+                name: Install Chrome
+                uses: browser-actions/setup-chrome@latest
+            }
+        }
+        stage('Build the Project') {
+            steps {
+                sh "mvn clean install -DskipTests"
+            }
+        }
+        stage('Run regression suite') {
+            steps {
+                sh "mvn clean test"
             }
         }
         stage('Publish Allure Report') {
@@ -46,3 +53,4 @@ pipeline {
         }
     }
 }
+
