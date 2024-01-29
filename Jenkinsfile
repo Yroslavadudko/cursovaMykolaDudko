@@ -3,6 +3,9 @@ pipeline {
     options {
         timeout(time: 1, unit: 'HOURS')
     }
+    triggers {
+            cron('0 9 * * *')
+        }
     parameters {
         string(name: 'MyRegressionSuite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
     }
@@ -18,8 +21,7 @@ pipeline {
     stages {
         stage('Build the Project') {
             steps {
-                // Крок для збірки проекту
-                sh "mvn clean install -DskipTests"
+                sh "mvn clean install"
             }
         }
         stage('Run Tests') {
@@ -27,15 +29,13 @@ pipeline {
                 // Крок для запуску контейнера Docker зі сторінкою Kanboard
                 script {
                     docker.image('kanboard/kanboard:latest').withRun('-p 80:80') { c ->
-                        // Команди для запуску тестів на вашій сторінці Kanboard
-                        sh "mvn clean test -DMyRegressionSuite=${MyRegressionSuite}"
+                        sh "mvn clean test"
                     }
                 }
             }
         }
         stage('Publish Allure Report') {
             steps {
-                // Крок для публікації звіту Allure
                 allure([includeProperties: false,
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
