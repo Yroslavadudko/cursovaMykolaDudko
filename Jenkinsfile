@@ -18,8 +18,9 @@ pipeline {
     stages {
         stage('Install Chrome') {
             steps {
-                name: Install Chrome
-                uses: browser-actions/setup-chrome@latest
+                script {
+                    tool name: 'Chrome', type: 'hudson.plugins.chrome.tools.ChromeInstallation'
+                }
             }
         }
         stage('Build the Project') {
@@ -53,4 +54,3 @@ pipeline {
         }
     }
 }
-
