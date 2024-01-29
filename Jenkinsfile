@@ -14,15 +14,9 @@ pipeline {
     tools {
         jdk 'JDK 17'
         maven 'Maven'
+        browser 'Chrome'
     }
     stages {
-        stage('Install Chrome') {
-            steps {
-                script {
-                    tool name: 'Chrome', type: 'hudson.plugins.chrome.tools.ChromeInstallation'
-                }
-            }
-        }
         stage('Build the Project') {
             steps {
                 sh "mvn clean install -DskipTests"
