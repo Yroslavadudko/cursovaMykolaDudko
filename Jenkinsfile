@@ -4,7 +4,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     parameters {
-        string(name: 'MyTestSuite', description: 'Enter the name of the Test Suite', defaultValue: 'ApiProjectsTests')
+        string(name: 'My Regression suite', description: 'Enter the name of the Test Suite', defaultValue: 'ApiProjectsTests')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
@@ -14,7 +14,6 @@ pipeline {
     tools {
         jdk 'JDK 17'
         maven 'Maven'
-        browser 'Chrome'
     }
     stages {
         stage('Build the Project') {
