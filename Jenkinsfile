@@ -4,7 +4,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     parameters {
-        string(name: 'My Regression suite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
+        string(name: 'MyRegressionSuite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
@@ -28,7 +28,7 @@ pipeline {
                 script {
                     docker.image('kanboard/kanboard:latest').withRun('-p 80:80') { c ->
                         // Команди для запуску тестів на вашій сторінці Kanboard
-                        sh "mvn clean test -DbaseUrl=${baseUrl}"
+                        sh "mvn clean test -DMyRegressionSuite=${MyRegressionSuite}"
                     }
                 }
             }
@@ -56,3 +56,4 @@ pipeline {
         }
     }
 }
+
