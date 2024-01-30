@@ -16,7 +16,6 @@ pipeline {
     tools {
         jdk 'JDK'
         maven 'Maven'
-        docker 'Docker'
     }
     stages {
         stage('Build the Project') {
