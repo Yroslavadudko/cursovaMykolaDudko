@@ -15,7 +15,7 @@ pipeline {
         M2_HOME = '/usr/local/Cellar/maven/3.9.6/libexec'
     }
     tools {
-        jdk 'JDK 17'
+        jdk 'JDK'
         maven 'Maven'
     }
     stages {
