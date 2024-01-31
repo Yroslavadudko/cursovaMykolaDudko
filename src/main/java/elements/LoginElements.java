@@ -27,6 +27,6 @@ public class LoginElements {
         return $(By.xpath("//header/div[3]/div[2]/a[1]/i[1]"));
     }
     public static SelenideElement activationUsernameField(){
-        return $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[1]"));
+        return $(By.xpath("//body/div[@id='dropdown']/ul[1]/li[1]/strong[1]"));
     }
 }

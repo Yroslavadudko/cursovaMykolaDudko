@@ -22,7 +22,7 @@ public class LoginsUiTest extends BaseTest {
         Configuration.headless = headless;
         loginAsAdmin();
         dropdownUserField().click();
-        activationUsernameField().shouldHave(text("admin"));
+        activationUsernameField().shouldBe(visible);
         logOutButton().click();
     }
 

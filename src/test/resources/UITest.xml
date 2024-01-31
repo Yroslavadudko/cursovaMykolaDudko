@@ -1,0 +1,18 @@
+<suite name="UITestSuite">
+    <test name="TestLoginUi">
+        <classes>
+            <class name="ui.testsUi.LoginsUiTest">
+                <methods>
+                    <include name="positiveLoginTest"/>
+                    <include name="negativeLoginTestInvalidUsername"/>
+                    <include name="negativeLoginTestInvalidPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="TestCreateProjectUi">
+        <classes>
+            <class name="ui.testsUi.ProjectsUiTest"/>
+        </classes>
+    </test>
+</suite>
