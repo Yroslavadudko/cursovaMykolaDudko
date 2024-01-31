@@ -170,7 +170,7 @@
                 <version>3.2.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testDudko.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/ApiTest.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -Dfile.encoding=${project.build.sourceEncoding}
