@@ -8,7 +8,7 @@ pipeline {
     }
     parameters {
          string(name: 'MyRegressionSuite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
-         string(name: 'baseUrl', defaultValue: 'http://127.0.0.1/login', description: 'Validate Application URL')
+         string(name: 'baseUrl', description: 'Validate Application URL', defaultValue: 'http://localhost:443/wd/hub')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
@@ -18,36 +18,20 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stage('Build the Project') {
+        stage("Build the Project") {
             steps {
-                sh "mvn clean install -DskipTests"
+                sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Start Kanboard Container') {
-            steps {
-                script {
-                    // Запуск контейнера з канбордом
-                    docker.image('kanboard/kanboard:latest').run('-p 80:80')
-                }
-            }
-        }
-        stage('Run Tests') {
+        stage("Run Tests") {
             steps {
                 script {
                     // Запуск тестів з базовим URL, який передається як параметр
-                    sh "mvn clean test -DbaseUrl=${baseUrl}"
+                    sh 'mvn clean test -DbaseUrl=${baseUrl}'
                 }
             }
         }
-        stage('Stop Kanboard Container') {
-            steps {
-                script {
-                    // Зупинка контейнера з канбордом після закінчення тестів
-                    docker.image('kanboard/kanboard:latest').stop()
-                }
-            }
-        }
-        stage('Publish Allure Report') {
+        stage("Publish Allure Report") {
             steps {
                 allure([includeProperties: false,
                         properties: [],
