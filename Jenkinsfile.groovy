@@ -20,20 +20,21 @@ pipeline {
     stages {
         stage("Build the Project") {
             steps {
-                sh 'mvn clean install -DskipTests'
+                sh "mvn clean install -DskipTests"
             }
         }
         stage("Run Tests") {
             steps {
                 script {
                     // Запуск тестів з базовим URL, який передається як параметр
-                    sh 'mvn clean test -DbaseUrl=${baseUrl}'
+                    sh "mvn clean test -DbaseUrl=${baseUrl}"
                 }
             }
         }
         stage("Publish Allure Report") {
             steps {
                 allure([includeProperties: false,
+                        jdk:'',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
