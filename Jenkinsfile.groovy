@@ -8,7 +8,7 @@ pipeline {
     }
     parameters {
          string(name: 'MyRegressionSuite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
-         string(name: 'baseUrl', description: 'Validate Application URL', defaultValue: 'http://localhost')
+         string(name: 'baseUrl', description: 'Validate Application URL', defaultValue: 'http://cursovadudkomykola-kanboard-1:80')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
@@ -26,7 +26,6 @@ pipeline {
         stage("Run Tests") {
             steps {
                 script {
-                    // Запуск тестів з базовим URL, який передається як параметр
                     sh "mvn clean test -DbaseUrl=${baseUrl}"
                 }
             }
