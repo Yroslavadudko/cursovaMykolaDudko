@@ -8,7 +8,7 @@ pipeline {
     }
     parameters {
          string(name: 'MyRegressionSuite', description: 'Enter the name of the Test Suite', defaultValue: 'MyTestSuite')
-         string(name: 'baseUrl', description: 'Validate Application URL', defaultValue: 'http://cursovadudkomykola-kanboard-1:80')
+         string(name: 'baseUrl', description: 'Validate Application URL', defaultValue: 'http://localhost/login')
     }
     environment {
         mailRecipients = 'dudkomykola@icloud.com'
