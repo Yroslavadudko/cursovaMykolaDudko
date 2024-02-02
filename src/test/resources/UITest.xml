@@ -1,4 +1,4 @@
-<suite name="UITestSuite">
+<suite name="UITest suite">
     <test name="TestLoginUi">
         <classes>
             <class name="ui.testsUi.LoginsUiTest">

@@ -1,4 +1,4 @@
-<suite name="ApiTestSuite">
+<suite name="ApiTest suite">
     <test name="ApiProjectsTests">
         <classes>
             <class name="api.testsApi.ApiTests"/>

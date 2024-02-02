@@ -26,7 +26,7 @@ pipeline {
         stage("Run Tests") {
             steps {
                 script {
-                    sh "mvn clean test -DbaseUrl=${baseUrl}"
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/ApiTest.xml"
                 }
             }
         }
