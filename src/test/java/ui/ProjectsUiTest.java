@@ -1,6 +1,6 @@
 package ui;
 
-import models.dynamic.DynamicProjectTests;
+import data.dynamic.DynamicProjectTests;
 import org.testng.annotations.Test;
 import static elements.ProjectElements.*;
 import static steps.ui.LoginPage.loginAsAdmin;

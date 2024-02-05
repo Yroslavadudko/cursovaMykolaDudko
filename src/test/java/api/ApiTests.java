@@ -6,9 +6,9 @@ import models.args.tasks.TaskInfo;
 import models.args.users.UserInfo;
 import config.Config;
 import io.restassured.RestAssured;
-import models.dynamic.DynamicProjectTests;
-import models.dynamic.DynamicTaskTests;
-import models.dynamic.DynamicUserTests;
+import data.dynamic.DynamicProjectTests;
+import data.dynamic.DynamicTaskTests;
+import data.dynamic.DynamicUserTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Base64;
@@ -63,7 +63,6 @@ public class ApiTests {
     }
     @Test(groups = "ApiProjectsTests", priority = 3, dataProvider = "taskData", dataProviderClass = DynamicTaskTests.class)
     public void createTaskTest(String taskName) {
-        int resultProject_id = 0;
         TaskInfo.CreateTaskRequest createTask = TaskInfo.CreateTaskRequest.builder()
                 .jsonrpc("2.0")
                 .method(CREATE_TASK)
