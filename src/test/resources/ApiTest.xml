@@ -1,7 +1,7 @@
 <suite name="ApiTest suite">
     <test name="ApiProjectsTests">
         <classes>
-            <class name="api.testsApi.ApiTests"/>
+            <class name="api.ApiTests"/>
         </classes>
     </test>
 </suite>

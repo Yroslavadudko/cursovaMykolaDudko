@@ -171,7 +171,7 @@
                 <configuration>
                     <suiteXmlFiles>
                         <!--suppress UnresolvedMavenProperty -->
-                        <suiteXmlFile>src/test/resources/${suite}.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/FullTest.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -Dfile.encoding=${project.build.sourceEncoding}
